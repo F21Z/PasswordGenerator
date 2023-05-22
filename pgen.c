@@ -60,7 +60,7 @@ int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum)
 /*     Change Description                                                    */
 /*Number:Date:User:Comments***************************************************/
 /* 1:22/5/23:F21Z:Initial Version                                            */
-/*                                                                           */
+/* 2:22/5/23:F21Z:Version 2                                                  */
 /*                                                                           */
 /*                                                                           */
 /********END*OF*FILE**********************************************************/
