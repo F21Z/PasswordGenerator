@@ -21,6 +21,7 @@
 #define PASSWORD_LEN    8            
 
 int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum);
+int generate(char* pwd_array, int len_pwd_array, char** str_array, int* cat_count_array, int len_cat_count_array);
 
 int main()
 {
@@ -41,22 +42,12 @@ int main()
 
     char pwd[PASSWORD_LEN+1];
     pwd[PASSWORD_LEN] = '\0';  //making sure last character is null
-    int pwd_i = 0;    
-    for(int i=0; i<CAT_COUNT; i++)
-    {
-        //printf("%d: %s = %d\n",counts[i], cats[i], strlen(cats[i]));
-        
-        for (int j=0; j<counts[i]; j++)
-        {
-            int ri = rand()%strlen(cats[i]);
-            pwd[pwd_i++] = cats[i][ri];
-            //printf("%c = %c\n", pwd[pwd_i-1], cats[i][ri]);
-            
-        }
-    }
-    printf("%s\n", pwd);
+ 
 
-    printf("\n");
+    generate(pwd, PASSWORD_LEN, cats, pcounts, CAT_COUNT);
+    printf("%s\n", pwd);
+    //printf("\n");
+    
     return 0;                                    
 }
 
@@ -78,6 +69,28 @@ int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum)
     return 0;   
 }
 
+int generate(char* pwd_array, int len_pwd_array, char** str_array, int* cat_count_array, int len_cat_count_array)
+{
+    int pwd_i = 0;
+    
+    for(int i=0; i<len_cat_count_array; i++)
+    {
+        int cur_count = *(cat_count_array+i);
+        char* cur_str_array = *(str_array+i);
+        int cur_len = strlen(cur_str_array);
+        
+        //printf("%d: %s = %d\n", cur_count, cur_str_array, cur_len);
+        
+        for (int j=0; j<cur_count; j++)
+        {
+            int ri = rand()%cur_len;
+            pwd_array[pwd_i++] = *( cur_str_array+ri );
+            //printf("%c = %c\n", pwd_array[pwd_i-1], *( cur_str_array+ri ));
+            
+        }
+    }
+    return 0;
+}
 
 
 /*****************************************************************************/
@@ -88,5 +101,9 @@ int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum)
 /* 1:22/5/23:F21Z:Initial Version                                            */
 /* 2:22/5/23:F21Z:moved the code to new function   n_numbers_sum             */
 /* 3:22/5/23:F21Z:added code pick random chars based on count                */
+/* 4:22/5/23:F21Z:Moved the randcom chars picking to a new function generate */
+/*                                                                           */
+/*                                                                           */
+/*                                                                           */
 /*                                                                           */
 /********END*OF*FILE**********************************************************/
