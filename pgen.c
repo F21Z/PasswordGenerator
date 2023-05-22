@@ -22,6 +22,7 @@
 
 int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum);
 int generate(char* pwd_array, int len_pwd_array, char** str_array, int* cat_count_array, int len_cat_count_array);
+int rand_sel_sort(char* string, int str_len);
 
 int main()
 {
@@ -42,11 +43,15 @@ int main()
 
     char pwd[PASSWORD_LEN+1];
     pwd[PASSWORD_LEN] = '\0';  //making sure last character is null
- 
+    char *p_pwd = &pwd[0];
 
     generate(pwd, PASSWORD_LEN, cats, pcounts, CAT_COUNT);
-    printf("%s\n", pwd);
+    //printf("%s\n", pwd);
     //printf("\n");
+
+    rand_sel_sort(p_pwd, strlen(pwd));
+    printf("%s\n", pwd);    
+
     
     return 0;                                    
 }
@@ -92,6 +97,16 @@ int generate(char* pwd_array, int len_pwd_array, char** str_array, int* cat_coun
     return 0;
 }
 
+int rand_sel_sort(char* string, int str_len)
+{
+    for(int i=(str_len-1); i>0; i--)
+    {
+        int n = rand()%i;
+        int temp = *(string+i);
+        *(string+i) = *(string+n);
+        *(string+n) = temp;
+    }
+}
 
 /*****************************************************************************/
 /********END*OF*CODE**********************************************************/
@@ -102,7 +117,7 @@ int generate(char* pwd_array, int len_pwd_array, char** str_array, int* cat_coun
 /* 2:22/5/23:F21Z:moved the code to new function   n_numbers_sum             */
 /* 3:22/5/23:F21Z:added code pick random chars based on count                */
 /* 4:22/5/23:F21Z:Moved the randcom chars picking to a new function generate */
-/*                                                                           */
+/* 5:22/5/23:F21Z:Added function to shuffle randomly picked charecters       */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
