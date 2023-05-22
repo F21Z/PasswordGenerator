@@ -19,33 +19,47 @@
 
 #define PASSWORD_LEN    8            
 
+int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum);
+
+
 int main()
 {
-    int count[CAT_COUNT]={0};       //count array holds count of each character category
-    int sum=CAT_COUNT;              //initializing sum since every character should occur atleast once
     srand(time(NULL));              //seed random
     
-    for(int i=0 ;i<LAST_CAT_I ;i++){    //to assign count of each character category except last category
-        int range= PASSWORD_LEN-sum+1;  //define range as max remaining charecters so that no. of charecters shouldnt exceed given pwd length
-        int r= rand() % range;          //GET a random number in range
-        count[i] = 1+r;                 //each character category to appear once or more than once
-        sum     += r;                   //update sum so that max remaining characters next time decreases
-        printf("%d-",count[i]);         
-    }
-    count[LAST_CAT_I] = 1+(PASSWORD_LEN-sum);    //last category count should be remaining count**
-    printf("%d",count[LAST_CAT_I]);              //printing the count of last
+    int counts[CAT_COUNT]={0};       //count array holds count of each character category
+    int *pcounts= &counts[0];
+    
+    //printf("\n");
+    n_numbers_sum(pcounts, CAT_COUNT, PASSWORD_LEN);
+
+    
     return 0;                                    
 }
 
 
 
+int n_numbers_sum(int *pArray, int ArrayLen, int ArraySum)
+{
+    for(int i=0 ;i<LAST_CAT_I ;i++){    //to assign count of each character category except last category
+        int range= ArraySum-ArrayLen+1;  //define range as max remaining charecters so that no. of charecters shouldnt exceed given pwd length
+        int r= rand() % range;          //GET a random number in range
+        *(pArray+i) = 1+r;                 //each character category to appear once or more than once
+        ArrayLen     += r;                   //update ArrayLen so that max remaining characters next time decreases
+        printf("%d-",*(pArray+i));         
+    }
+    *(pArray+LAST_CAT_I) = 1+(ArraySum-ArrayLen);    //last category count should be remaining count**
+    printf("%d",*(pArray+LAST_CAT_I));              //printing the count of last
+    
+
+    return 0;   
+}
 
 /*****************************************************************************/
 /********END*OF*CODE**********************************************************/
 /*****************************************************************************/
 /*     Change Description                                                    */
 /*Number:Date:User:Comments***************************************************/
-/* 1:22/5/23:f21z:Initial Version                                            */
+/* 1:22/5/23:F21Z:Initial Version                                            */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
